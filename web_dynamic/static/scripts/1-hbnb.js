@@ -1,16 +1,26 @@
-$(function() {
-    let my_list = {};
+$(function () {
+  const myDict = {};
 
-    $('input[type="checkbox"]').on('change', function() {
-        const amen_name = $(this).data('name');
-        const amen_id = $(this).data('id');
+  $('.filters h4').css({
+    'white-space': 'nowrap',
+    'text-overflow': 'ellipsis',
+    'overflow-x': 'clip',
+    'max-width': '285px'
+  });
 
-        if (this.checked) {
-            my_list[amen_id] = amen_name;
-        } else {
-            delete my_list[amen_id];
-        }
+  $('input[type="checkbox"]').on('change', function () {
+    const amenName = $(this).data('name');
+    const amenId = $(this).data('id');
 
-        $('h4').text(Object.values(my_list).join(', ') || 'Amenities');
-    });
+    if (this.checked) {
+      myDict[amenId] = amenName;
+    } else {
+      delete myDict[amenId];
+    }
+
+    const userFilter = Object.values(myDict);
+    const toDisplay = userFilter.join(', ');
+
+    $('.amenities h4').text(toDisplay);
+  });
 });
